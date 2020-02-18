@@ -41,6 +41,9 @@ const builderStates = {
 
             //todo select the closest store
 
+            // if no resources go to holding
+            creep.moveTo(places.holding[location.x], places.holding[location.y]);
+
             creep.memory.target = sources[0].id;
             creep.memory.state = states.collectResource;
             console.log(sources[0].store[RESOURCE_ENERGY]);
@@ -72,6 +75,8 @@ const builderStates = {
         if(creep.store[RESOURCE_ENERGY] === creep.store.getCapacity(RESOURCE_ENERGY))
             creep.memory.state = states.idle;
 
+        if(resourceContainer.store[RESOURCE_ENERGY] === 0)
+            creep.memory.state = states.idle;
 
     },
     selectBuildOrRepair: (creep) => {
@@ -87,6 +92,11 @@ const builderStates = {
         //give build priority for now
         if(buildTargets.length)
         {
+            //clean this up, make sure containers are built first
+            buildTargets.sort((a, b) => {
+                return a.structureType !== STRUCTURE_CONTAINER
+            });
+
             creep.memory.state = states.build;
             creep.memory.target = buildTargets[0].id;
         }

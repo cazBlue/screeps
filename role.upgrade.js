@@ -35,6 +35,9 @@ var roleUpgrader = {
                 {
                     creep.moveTo(target, {visualizePathStyle: {stroke: '#83ff6b'} });
                 }
+
+                if(target.store[RESOURCE_ENERGY] === 0)
+                    creep.suicide(); //short term solution to remove blocks...
             }
         }
     }
