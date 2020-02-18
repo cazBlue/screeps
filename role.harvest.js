@@ -1,8 +1,33 @@
-const location = {x: 0, y: 1};
+const states = require('states');
+const stateOpt = require('states.harvester');
+
+const vector = {x: 0, y: 1};
 const places = {
     holding: [6,19]
 };
 
+
+const roleHarvest = {
+    run: (creep) => {
+
+        switch (creep.memory.state) {
+            case states.idle:
+                stateOpt.idle(creep);
+                break;
+            case states.harvest:
+                stateOpt.harvest(creep);
+                break;
+            case states.drop:
+                stateOpt.drop(creep);
+                break;
+        }
+    }
+};
+
+module.exports = roleHarvest;
+
+
+/*
 const deliverCargo = (creep) => {
     const targets = creep.room.find(FIND_STRUCTURES, {
         filter: (structure) => {
@@ -15,7 +40,7 @@ const deliverCargo = (creep) => {
     });
     if(targets.length === 0)
     {
-        creep.moveTo(places.holding[location.x], places.holding[location.y], {visualizePathStyle: {stroke: '#5c60ff'}});
+        creep.moveTo(places.holding[vector.x], places.holding[vector.y], {visualizePathStyle: {stroke: '#5c60ff'}});
         return;
     }
 
@@ -23,23 +48,4 @@ const deliverCargo = (creep) => {
         creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
     }
 };
-
-const mineSource = (creep) => {
-    const sources = creep.room.find(FIND_SOURCES);
-    if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-        creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}});
-    }
-};
-
-const roleHarvest = {
-    run: (creep) => {
-        if(creep.store.getFreeCapacity() > 0) {
-            mineSource(creep);
-        }
-        else {
-            deliverCargo(creep);
-        }
-    }
-};
-
-module.exports = roleHarvest;
+ */

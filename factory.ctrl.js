@@ -1,16 +1,33 @@
-const spawnACreep = (role) => {
+const creepBotCounts = {
+    harvestBot: {
+        count: 3,
+        skills: [WORK, MOVE]
+    },
+    upgradeBot: {
+        count: 3,
+        skills: [WORK,CARRY,MOVE]
+    },
+    builderBot: {
+        count: 3,
+        skills: [WORK,CARRY,MOVE]
+    }
+};
+
+const states = require('states');
+
+const spawnACreep = (role, skills) => {
     //console.log("Not enough " + role);
     const newName = role + Game.time;
     //console.log('Spawning new harvester: ' + newName);
 
-    Game.spawns['Rome'].spawnCreep([WORK,CARRY,MOVE], newName, {
-        memory: {role: role},
+    Game.spawns['Rome'].spawnCreep(skills, newName, {
+        memory: {role: role, state: states.idle},
         directions: [TOP]
     });
 };
 
 const factory = {
-    run: (creep) => {
+    run: () => {
         if(Game.spawns['Rome'].spawning != null) //todo add check for resource as well
             return;
 
@@ -34,19 +51,19 @@ const factory = {
             }
         }
 
-        if(creepCount.upgrade <= 3)
+        if(creepCount.upgrade < creepBotCounts.upgradeBot.count)
         {
-            spawnACreep('upgrade');
+            spawnACreep('upgrade', creepBotCounts.upgradeBot.skills);
         }
 
-        if(creepCount.builder <= 5)
+        if(creepCount.builder < creepBotCounts.builderBot.count)
         {
-            spawnACreep('builder');
+            spawnACreep('builder', creepBotCounts.builderBot.skills);
         }
 
-        if(creepCount.harvest <= 5)
+        if(creepCount.harvest < creepBotCounts.harvestBot.count)
         {
-            spawnACreep('harvest');
+            spawnACreep('harvest', creepBotCounts.harvestBot.skills);
         }
 
     }

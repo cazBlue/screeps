@@ -4,6 +4,7 @@ const RoleUpgrade = require('role.upgrade');
 const RoleBuilder = require('role.builder');
 
 
+
 module.exports.loop = function () {
     for(const name in Memory.creeps) {
         if(!Game.creeps[name]) {
@@ -12,15 +13,20 @@ module.exports.loop = function () {
         }
     }
 
-    factory.run(Game.creeps); //create new creeps when needed
+    factory.run(); //create new creeps when needed
+
 
     for(const name in Game.creeps) {
         const creep = Game.creeps[name];
         //console.log(Game.creeps[name]);
 
+        //creep.suicide();
+        //return;
+
         switch (creep.memory.role) {
             case 'harvest':
                 RoleHarvest.run(creep);
+                //creep.suicide();
                 break;
             case 'upgrade':
                 RoleUpgrade.run(creep);
