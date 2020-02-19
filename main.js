@@ -2,6 +2,7 @@ const factory = require('factory.ctrl');
 const RoleHarvest = require('role.harvest');
 const RoleUpgrade = require('role.upgrade');
 const RoleBuilder = require('role.builder');
+const RoleMule = require('role.mule');
 
 
 
@@ -34,19 +35,10 @@ module.exports.loop = function () {
             case 'builder':
                 RoleBuilder.run(creep);
                 break;
+            case 'mule':
+                RoleMule.run(creep);
+                break;
         }
 
-
-        /*
-        if(creep.memory.role == 'harvester') {
-            roleHarvester.run(creep);
-        }
-        if(creep.memory.role == 'upgrader') {
-            roleUpgrader.run(creep);
-        }
-        if(creep.memory.role == 'builder') {
-            roleBuilder.run(creep);
-        }
-         */
     }
 };

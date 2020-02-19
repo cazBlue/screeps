@@ -34,10 +34,14 @@ const builderStates = {
             filter: (struct) => struct.structureType === STRUCTURE_CONTAINER
         });
 
+        const droppedSources = creep.room.find(FIND_DROPPED_RESOURCES, {
+            //todo add filter by amount
+        });
+
         if(sources.length)
         {
             //select the best source
-            sources.sort((a, b) => a.store[RESOURCE_ENERGY] - b.store[RESOURCE_ENERGY]);
+            sources.sort((a, b) => b.store[RESOURCE_ENERGY] - a.store[RESOURCE_ENERGY]);
 
             //todo select the closest store
 
@@ -51,6 +55,12 @@ const builderStates = {
             creep.memory.state = states.collectResource;
             //console.log(sources[0].store[RESOURCE_ENERGY]);
         }
+
+/*        if(droppedSources.length)
+        {
+            creep.memory.target = sources[0].id;
+            creep.memory.state = states.collectResource;
+        }*/
 
     },
     moveTo: (creep) => {
@@ -76,8 +86,11 @@ const builderStates = {
             return;
         }
 
-        if(creep.store[RESOURCE_ENERGY] === creep.store.getCapacity(RESOURCE_ENERGY))
+        if(creep.store.getFreeCapacity(RESOURCE_ENERGY) === 0)
+        {
+            creep.move('LEFT');
             creep.memory.state = states.idle;
+        }
 
         if(resourceContainer.store[RESOURCE_ENERGY] === 0)
             creep.memory.state = states.idle;
@@ -111,6 +124,12 @@ const builderStates = {
     },
     build: (creep) => {
         const target = Game.getObjectById(creep.memory.target);
+        if(!target)
+        {
+            creep.memory.state = states.idle;
+            creep.say('RE-ASSIGN');
+            return;
+        }
         const buildResult = creep.build(target);
 
         if(buildResult == ERR_NOT_IN_RANGE) {
@@ -129,7 +148,7 @@ const builderStates = {
             creep.moveTo(target, {visualizePathStyle: {stroke: '#83ff6b'}});
         }
 
-        if(creep.store[RESOURCE_ENERGY] == 0)
+        if(creep.store[RESOURCE_ENERGY] == 0 || target.hits >= target.hitsMax)
         {
             creep.memory.state = states.idle; //let idle handle it
         }

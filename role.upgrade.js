@@ -25,7 +25,7 @@ var roleUpgrader = {
             if(sources.length)
             {
                 //select the best source
-                sources.sort((a, b) => a.store[RESOURCE_ENERGY] - b.store[RESOURCE_ENERGY]);
+                sources.sort((a, b) => b.store[RESOURCE_ENERGY] - a.store[RESOURCE_ENERGY]);
 
                 //todo select the closest store
 
