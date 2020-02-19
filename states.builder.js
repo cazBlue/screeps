@@ -118,6 +118,16 @@ const builderStates = {
         else if(repairTargets.length)
         {
             repairTargets.sort((a,b) => a.hits - b.hits);
+            repairTargets.sort((a,b) => {
+                const isCont = a.structureType === STRUCTURE_CONTAINER;
+                const bIsCont = b.structureType === STRUCTURE_CONTAINER;
+                if(isCont)
+                    return -1;
+                if(bIsCont)
+                    return 1;
+
+                return 0;
+            });
             creep.memory.state = states.repair;
             creep.memory.target = repairTargets[0].id;
         }

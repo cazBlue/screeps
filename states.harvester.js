@@ -14,7 +14,7 @@ const mineSource = (creep) => {
 
 const harvesterIdle = {
     idle: (creep) => {
-        console.log("harvester is in idle state");
+        //console.log("harvester is in idle state");
 
         //todo check for available sources and assign max 3 per source
         creep.memory.state = states.harvest;
