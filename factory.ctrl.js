@@ -1,7 +1,7 @@
 const creepBotCounts = {
     harvestBot: {
         count: 3,
-        skills: [WORK, WORK, MOVE] //100, 100, 100, 50 = 350
+        skills: [WORK, WORK, WORK, MOVE] //100, 100, 100, 50 = 350
     },
     upgradeBot: {
         count: 6,

@@ -16,6 +16,23 @@ module.exports.loop = function () {
 
     factory.run(); //create new creeps when needed
 
+    //lazy tower addition....
+    const tower = Game.getObjectById('5e4dbf28a3d52080467472d5');
+    if(tower) {
+/*        const closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
+            filter: (structure) => structure.hits < structure.hitsMax
+        });
+        if(closestDamagedStructure) {
+            tower.repair(closestDamagedStructure);
+        }*/
+
+        const closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        if(closestHostile) {
+            tower.attack(closestHostile);
+        }
+    }
+
+
 
     for(const name in Game.creeps) {
         const creep = Game.creeps[name];
