@@ -21,8 +21,7 @@ const getExtension = (creep) => {
 
     for( const extens in extensions)
     {
-       if(extensions[extens].structureType === STRUCTURE_SPAWN ||
-           extensions[extens].structureType === STRUCTURE_TOWER
+       if(extensions[extens].structureType === STRUCTURE_SPAWN
            && extensions[extens].store.getFreeCapacity(RESOURCE_ENERGY) > 0)
 
            selection = extensions[extens]; //lets top up the spawn first
@@ -48,7 +47,9 @@ const builderStates = {
 
         const ext = getExtension(creep);
         //console.log(ext.store.getFreeCapacity(RESOURCE_ENERGY));
-        if(ext.store.getFreeCapacity(RESOURCE_ENERGY) === 0)
+        if(ext.store.getFreeCapacity(RESOURCE_ENERGY) === 0 &&
+            containers[0].store.getFreeCapacity(RESOURCE_ENERGY) === 0
+        )
         {
             creep.moveTo(places.holding[location.x], places.holding[location.y]);
             return;
