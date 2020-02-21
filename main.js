@@ -3,6 +3,8 @@ const RoleHarvest = require('role.harvest');
 const RoleUpgrade = require('role.upgrade');
 const RoleBuilder = require('role.builder');
 const RoleMule = require('role.mule');
+const Roles = require('roles');
+//const RoleGav = require('role.gavAssist');
 
 
 
@@ -25,7 +27,7 @@ module.exports.loop = function () {
         if(closestDamagedStructure) {
             tower.repair(closestDamagedStructure);
         }*/
-
+        //todo add room states for WAR/invader detection
         const closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
         if(closestHostile) {
             tower.attack(closestHostile);
@@ -42,19 +44,23 @@ module.exports.loop = function () {
         //return;
 
         switch (creep.memory.role) {
-            case 'harvest':
+            case Roles.harvest:
                 RoleHarvest.run(creep);
                 //creep.suicide();
                 break;
-            case 'upgrade':
+            case Roles.upgrade:
                 RoleUpgrade.run(creep);
                 break;
-            case 'builder':
+            case Roles.builder:
                 RoleBuilder.run(creep);
                 break;
-            case 'mule':
+            case Roles.mule:
                 RoleMule.run(creep);
                 break;
+/*            case "gavassist":
+                RoleGav.run(creep);
+                break;*/
+
         }
 
     }

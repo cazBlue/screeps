@@ -1,23 +1,39 @@
-const creepBotCounts = {
+const Roles = require('roles');
+
+const Screeps = {
     harvestBot: {
-        count: 3,
-        skills: [WORK, WORK, WORK, MOVE] //100, 100, 100, 50 = 350
+        target: 3,
+        count: 0,
+        skills: [WORK, WORK, WORK, MOVE], //100, 100, 100, 50 = 350
+        role: Roles.harvest
     },
     upgradeBot: {
-        count: 6,
-        skills: [WORK,CARRY,CARRY,MOVE]
+        target: 6,
+        count: 0,
+        skills: [WORK,CARRY,CARRY,MOVE],
+        role: Roles.upgrade
     },
     builderBot: {
-        count: 4,
-        skills: [WORK,CARRY,CARRY,MOVE]
+        target: 4,
+        count: 0,
+        skills: [WORK,CARRY,CARRY,MOVE],
+        role: Roles.builder
     },
     muleBot: {
-        count: 3,
-        skills: [CARRY,CARRY,MOVE,MOVE]
+        target: 3,
+        count: 0,
+        skills: [CARRY,CARRY,MOVE,MOVE],
+        role: Roles.mule
+    },
+    gavAssist: {
+        target: 0,
+        count: 0,
+        skills: [CARRY,CARRY,MOVE,MOVE,MOVE],
+        role: Roles.gavAssist
     }
 };
 
-/*
+/* //https://docs.screeps.com/api/#Constants
     BODYPART_COST
     "move": 50,
     "work": 100,
@@ -42,55 +58,60 @@ const spawnACreep = (role, skills) => {
     });
 };
 
+const updateCounts = () => {
+    for(const name in Game.creeps) {
+        switch (Game.creeps[name].memory.role) {
+            case Roles.harvest:
+                Screeps.harvestBot.count++;
+                break;
+            case Roles.upgrade:
+                Screeps.upgradeBot.count++;
+                break;
+            case Roles.builder:
+                Screeps.builderBot.count++;
+                break;
+            case Roles.mule:
+                Screeps.muleBot.count++;
+                break;
+            case Roles.gavAssist:
+                Screeps.gavAssist.count++;
+                break;
+        }
+    }
+};
+
 const factory = {
     run: () => {
         if(Game.spawns['Rome'].spawning != null) //todo add check for resource as well
             return;
 
-        let creepCount = {
-            harvest: 0,
-            upgrade: 0,
-            builder: 0,
-            mule:    0
-        };
-
-        for(const name in Game.creeps) {
-            switch (Game.creeps[name].memory.role) {
-                case 'harvest':
-                    creepCount.harvest++;
-                    break;
-                case 'upgrade':
-                    creepCount.upgrade++;
-                    break;
-                case 'builder':
-                    creepCount.builder++;
-                    break;
-                case 'mule':
-                    creepCount.mule++;
-                    break;
-            }
-        }
+        updateCounts();
 
         //give replacing harvesters top billing
-        if(creepCount.harvest < creepBotCounts.harvestBot.count)
+        if(Screeps.harvestBot.target < Screeps.harvestBot.count)
         {
-            spawnACreep('harvest', creepBotCounts.harvestBot.skills);
+            spawnACreep(Roles.harvest, Screeps.harvestBot.skills);
         }
         else
         {
-            if(creepCount.upgrade < creepBotCounts.upgradeBot.count)
+            if(Screeps.upgradeBot.target < Screeps.upgradeBot.count)
             {
-                spawnACreep('upgrade', creepBotCounts.upgradeBot.skills);
+                spawnACreep(Roles.upgrade, Screeps.upgradeBot.skills);
             }
 
-            if(creepCount.builder < creepBotCounts.builderBot.count)
+            if(Screeps.builderBot.target < Screeps.builderBot.count)
             {
-                spawnACreep('builder', creepBotCounts.builderBot.skills);
+                spawnACreep(Roles.builder, Screeps.builderBot.skills);
             }
 
-            if(creepCount.mule < creepBotCounts.muleBot.count)
+            if(Screeps.muleBot.target < Screeps.muleBot.count)
             {
-                spawnACreep('mule', creepBotCounts.muleBot.skills);
+                spawnACreep(Roles.mule, Screeps.muleBot.skills);
+            }
+
+            if(Screeps.gavAssist.target < Screeps.gavAssist.count)
+            {
+                spawnACreep(Roles.gavAssist, Screeps.gavAssist.skills);
             }
         }
     }
