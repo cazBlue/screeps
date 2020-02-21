@@ -143,7 +143,17 @@ const builderStates = {
         const buildResult = creep.build(target);
 
         if(buildResult == ERR_NOT_IN_RANGE) {
-            creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
+            creep.moveTo(target);
+/*            const start = [10,27];;
+            //const end = [19 , 40]
+            const newPath = new RoomPosition(10,27,'W7S27').findPathTo(new RoomPosition(19,40,'W7S27'),{maxOps:100000});
+
+            //const path = creep.pos.findPathTo(target);
+            const res = creep.moveByPath(newPath, {visualizePathStyle: {stroke: '#69ff75'}});
+            if(res === ERR_NOT_FOUND)
+                creep.moveTo(start[0], start[1], {visualizePathStyle: {stroke: '#536dff'}});
+            console.log(res);
+            console.log(JSON.stringify(newPath))*/
         }
 
         if(creep.store[RESOURCE_ENERGY] == 0)

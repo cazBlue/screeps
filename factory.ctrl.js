@@ -16,7 +16,7 @@ let Screeps = {
     builderBot: {
         target: 2,
         count: 0,
-        skills: [WORK,CARRY,CARRY,MOVE],
+        skills: [WORK,CARRY,CARRY,MOVE,MOVE,MOVE],
         role: Roles.builder
     },
     muleBot: {

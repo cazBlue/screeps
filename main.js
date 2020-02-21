@@ -44,7 +44,7 @@ module.exports.loop = function () {
         //return;
 
         switch (creep.memory.role) {
-            case Roles.harvest:
+            case Roles.harvest || Roles.harvestSecondry:
                 RoleHarvest.run(creep);
                 //creep.suicide();
                 break;
