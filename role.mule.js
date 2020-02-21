@@ -4,6 +4,8 @@ const stateOpt = require('states.mule');
 const roleMule = {
     run: (creep) => {
 
+        //creep.memory.state = states.idle;
+
         switch (creep.memory.state) {
             case states.idle:
                 stateOpt.idle(creep);
@@ -13,6 +15,9 @@ const roleMule = {
                 break;
             case states.deliverResource:
                 stateOpt.deliverResource(creep);
+                break;
+            case states.selectDeliverTarget:
+                stateOpt.selectDeliverTarget(creep);
                 break;
         }
     }

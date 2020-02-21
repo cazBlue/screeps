@@ -8,7 +8,8 @@ const states = {
     selectResource: 7,
     moveTo: 8,
     selectBuildOrRepair: 9,
-    deliverResource: 10
+    deliverResource: 10,
+    selectDeliverTarget: 11
 };
 
 module.exports = states;

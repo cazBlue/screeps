@@ -1,6 +1,6 @@
 const Roles = require('roles');
 
-const Screeps = {
+let Screeps = {
     harvestBot: {
         target: 3,
         count: 0,
@@ -8,13 +8,13 @@ const Screeps = {
         role: Roles.harvest
     },
     upgradeBot: {
-        target: 6,
+        target: 4,
         count: 0,
         skills: [WORK,CARRY,CARRY,MOVE],
         role: Roles.upgrade
     },
     builderBot: {
-        target: 4,
+        target: 2,
         count: 0,
         skills: [WORK,CARRY,CARRY,MOVE],
         role: Roles.builder
@@ -86,30 +86,31 @@ const factory = {
             return;
 
         updateCounts();
+        //console.log(JSON.stringify(Screeps));
 
         //give replacing harvesters top billing
-        if(Screeps.harvestBot.target < Screeps.harvestBot.count)
+        if(Screeps.harvestBot.count < Screeps.harvestBot.target)
         {
             spawnACreep(Roles.harvest, Screeps.harvestBot.skills);
         }
         else
         {
-            if(Screeps.upgradeBot.target < Screeps.upgradeBot.count)
+            if(Screeps.upgradeBot.count < Screeps.upgradeBot.target)
             {
                 spawnACreep(Roles.upgrade, Screeps.upgradeBot.skills);
             }
 
-            if(Screeps.builderBot.target < Screeps.builderBot.count)
+            if(Screeps.builderBot.count < Screeps.builderBot.target)
             {
                 spawnACreep(Roles.builder, Screeps.builderBot.skills);
             }
 
-            if(Screeps.muleBot.target < Screeps.muleBot.count)
+            if(Screeps.muleBot.count < Screeps.muleBot.target)
             {
                 spawnACreep(Roles.mule, Screeps.muleBot.skills);
             }
 
-            if(Screeps.gavAssist.target < Screeps.gavAssist.count)
+            if(Screeps.gavAssist.count < Screeps.gavAssist.target)
             {
                 spawnACreep(Roles.gavAssist, Screeps.gavAssist.skills);
             }
