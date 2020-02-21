@@ -1,37 +1,5 @@
 const Roles = require('roles');
 
-let Screeps = {
-    harvestBot: {
-        target: 3,
-        count: 0,
-        skills: [WORK, WORK, WORK, MOVE], //100, 100, 100, 50 = 350
-        role: Roles.harvest
-    },
-    upgradeBot: {
-        target: 4,
-        count: 0,
-        skills: [WORK,CARRY,CARRY,MOVE],
-        role: Roles.upgrade
-    },
-    builderBot: {
-        target: 2,
-        count: 0,
-        skills: [WORK,CARRY,CARRY,MOVE,MOVE,MOVE],
-        role: Roles.builder
-    },
-    muleBot: {
-        target: 3,
-        count: 0,
-        skills: [CARRY,CARRY,MOVE,MOVE],
-        role: Roles.mule
-    },
-    gavAssist: {
-        target: 0,
-        count: 0,
-        skills: [CARRY,CARRY,MOVE,MOVE,MOVE],
-        role: Roles.gavAssist
-    }
-};
 
 /* //https://docs.screeps.com/api/#Constants
     BODYPART_COST
@@ -83,8 +51,42 @@ const updateCounts = (ScreepsList) => {
 
 const factory = {
     run: () => {
-        if(Game.spawns['Rome'].spawning != null) //todo add check for resource as well
-            return;
+        let Screeps = {
+            harvestBot: {
+                target: 2,
+                count: 0,
+                skills: [WORK, WORK, WORK, MOVE], //100, 100, 100, 50 = 350
+                role: Roles.harvest
+            },
+            upgradeBot: {
+                target: 3,
+                count: 0,
+                skills: [WORK,CARRY,CARRY,MOVE],
+                role: Roles.upgrade
+            },
+            builderBot: {
+                target: 2,
+                count: 0,
+                skills: [WORK,CARRY,CARRY,MOVE,MOVE,MOVE],
+                role: Roles.builder
+            },
+            muleBot: {
+                target: 2,
+                count: 0,
+                skills: [CARRY,CARRY,MOVE,MOVE],
+                role: Roles.mule
+            },
+            gavAssist: {
+                target: -1,
+                count: 0,
+                skills: [CARRY,CARRY,MOVE,MOVE,MOVE],
+                role: Roles.gavAssist
+            }
+        };
+
+        //if(Game.spawns['Rome'].spawning != null) //todo add check for resource as well
+        //    return;
+        console.log("spawning");
 
         Screeps = updateCounts(Screeps);
         //console.log(JSON.stringify(Screeps));
@@ -92,7 +94,7 @@ const factory = {
         //give replacing harvesters top billing
         let spawnSelected = false;
 
-        if(Screeps.harvestBot.count < Screeps.harvestBot.target
+        if(Screeps.harvestBot.count <= Screeps.harvestBot.target
             && !spawnSelected
             && Screeps.muleBot.count > 0
             )
@@ -102,25 +104,25 @@ const factory = {
         }
 
 
-        if(Screeps.muleBot.count < Screeps.muleBot.target && !spawnSelected)
+        if(Screeps.muleBot.count <= Screeps.muleBot.target && !spawnSelected)
         {
             spawnACreep(Roles.mule, Screeps.muleBot.skills);
             spawnSelected = true;
         }
 
-        if(Screeps.upgradeBot.count < Screeps.upgradeBot.target && !spawnSelected)
+        if(Screeps.upgradeBot.count <= Screeps.upgradeBot.target && !spawnSelected)
         {
             spawnACreep(Roles.upgrade, Screeps.upgradeBot.skills);
             spawnSelected = true;
         }
 
-        if(Screeps.builderBot.count < Screeps.builderBot.target && !spawnSelected)
+        if(Screeps.builderBot.count <= Screeps.builderBot.target && !spawnSelected)
         {
             spawnACreep(Roles.builder, Screeps.builderBot.skills);
             spawnSelected = true;
         }
 
-        if(Screeps.gavAssist.count < Screeps.gavAssist.target && !spawnSelected)
+        if(Screeps.gavAssist.count <= Screeps.gavAssist.target && !spawnSelected)
         {
             spawnACreep(Roles.gavAssist, Screeps.gavAssist.skills);
             spawnSelected = true;
