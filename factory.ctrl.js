@@ -94,7 +94,7 @@ const factory = {
 
         if(Screeps.harvestBot.count < Screeps.harvestBot.target
             && !spawnSelected
-            && Screeps.muleBot > 0
+            && Screeps.muleBot.count > 0
             )
         {
             spawnACreep(Roles.harvest, Screeps.harvestBot.skills);
