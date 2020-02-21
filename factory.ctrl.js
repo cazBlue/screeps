@@ -58,26 +58,27 @@ const spawnACreep = (role, skills) => {
     });
 };
 
-const updateCounts = () => {
+const updateCounts = (ScreepsList) => {
     for(const name in Game.creeps) {
         switch (Game.creeps[name].memory.role) {
             case Roles.harvest:
-                Screeps.harvestBot.count++;
+                ScreepsList.harvestBot.count++;
                 break;
             case Roles.upgrade:
-                Screeps.upgradeBot.count++;
+                ScreepsList.upgradeBot.count++;
                 break;
             case Roles.builder:
-                Screeps.builderBot.count++;
+                ScreepsList.builderBot.count++;
                 break;
             case Roles.mule:
-                Screeps.muleBot.count++;
+                ScreepsList.muleBot.count++;
                 break;
             case Roles.gavAssist:
-                Screeps.gavAssist.count++;
+                ScreepsList.gavAssist.count++;
                 break;
         }
     }
+    return ScreepsList;
 };
 
 const factory = {
@@ -85,36 +86,46 @@ const factory = {
         if(Game.spawns['Rome'].spawning != null) //todo add check for resource as well
             return;
 
-        updateCounts();
+        Screeps = updateCounts(Screeps);
         //console.log(JSON.stringify(Screeps));
 
         //give replacing harvesters top billing
-        if(Screeps.harvestBot.count < Screeps.harvestBot.target)
+        let spawnSelected = false;
+
+        if(Screeps.harvestBot.count < Screeps.harvestBot.target
+            && !spawnSelected
+            && Screeps.muleBot > 0
+            )
         {
             spawnACreep(Roles.harvest, Screeps.harvestBot.skills);
+            spawnSelected = true;
         }
-        else
+
+
+        if(Screeps.muleBot.count < Screeps.muleBot.target && !spawnSelected)
         {
-            if(Screeps.upgradeBot.count < Screeps.upgradeBot.target)
-            {
-                spawnACreep(Roles.upgrade, Screeps.upgradeBot.skills);
-            }
-
-            if(Screeps.builderBot.count < Screeps.builderBot.target)
-            {
-                spawnACreep(Roles.builder, Screeps.builderBot.skills);
-            }
-
-            if(Screeps.muleBot.count < Screeps.muleBot.target)
-            {
-                spawnACreep(Roles.mule, Screeps.muleBot.skills);
-            }
-
-            if(Screeps.gavAssist.count < Screeps.gavAssist.target)
-            {
-                spawnACreep(Roles.gavAssist, Screeps.gavAssist.skills);
-            }
+            spawnACreep(Roles.mule, Screeps.muleBot.skills);
+            spawnSelected = true;
         }
+
+        if(Screeps.upgradeBot.count < Screeps.upgradeBot.target && !spawnSelected)
+        {
+            spawnACreep(Roles.upgrade, Screeps.upgradeBot.skills);
+            spawnSelected = true;
+        }
+
+        if(Screeps.builderBot.count < Screeps.builderBot.target && !spawnSelected)
+        {
+            spawnACreep(Roles.builder, Screeps.builderBot.skills);
+            spawnSelected = true;
+        }
+
+        if(Screeps.gavAssist.count < Screeps.gavAssist.target && !spawnSelected)
+        {
+            spawnACreep(Roles.gavAssist, Screeps.gavAssist.skills);
+            spawnSelected = true;
+        }
+
     }
 };
 
