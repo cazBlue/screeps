@@ -13,7 +13,7 @@ const getExtension = (creep) => {
             struct.structureType === STRUCTURE_TOWER)
     });
 
-    extensions.sort((a, b) => a.store[RESOURCE_ENERGY] - b.store[RESOURCE_ENERGY]);
+    extensions.sort((a, b) => b.store.getFreeCapacity(RESOURCE_ENERGY) - a.store.getFreeCapacity(RESOURCE_ENERGY));
 
     //console.log(extensions);
 
@@ -21,10 +21,13 @@ const getExtension = (creep) => {
 
     for( const extens in extensions)
     {
-       if(extensions[extens].structureType === STRUCTURE_SPAWN
-           && extensions[extens].store.getFreeCapacity(RESOURCE_ENERGY) > 0)
+        //console.log('*************************************************');
+        //console.log(extensions[extens].store.getFreeCapacity(RESOURCE_ENERGY));
 
+       if(extensions[extens].structureType === STRUCTURE_SPAWN
+           && extensions[extens].store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
            selection = extensions[extens]; //lets top up the spawn first
+       }
     }
 
     return selection;

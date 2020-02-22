@@ -8,6 +8,7 @@ const Roles = require('roles');
 
 
 
+
 module.exports.loop = function () {
     for(const name in Memory.creeps) {
         if(!Game.creeps[name]) {

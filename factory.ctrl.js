@@ -86,7 +86,7 @@ const factory = {
 
         //if(Game.spawns['Rome'].spawning != null) //todo add check for resource as well
         //    return;
-        console.log("spawning");
+        //console.log("spawning");
 
         Screeps = updateCounts(Screeps);
         //console.log(JSON.stringify(Screeps));
