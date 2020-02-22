@@ -24,7 +24,8 @@ module.exports.loop = function () {
             filter: (structure) => {
                 return structure.hits < structure.hitsMax &&
                                         structure.structureType === STRUCTURE_WALL ||
-                                        structure.structureType === STRUCTURE_RAMPART
+                                        structure.structureType === STRUCTURE_RAMPART ||
+                                        structure.structureType === STRUCTURE_CONTAINER
             }
         });
 
@@ -37,8 +38,8 @@ module.exports.loop = function () {
         });
 
         if(closestDamagedStructure.length &&
-            tower.store.getUsedCapacity(RESOURCE_ENERGY) > tower.store.getCapacity(RESOURCE_ENERGY) / 2)
-        {   //repair if tower reserves > 50% so there is always ammo to shoot
+            tower.store.getUsedCapacity(RESOURCE_ENERGY) > tower.store.getCapacity(RESOURCE_ENERGY) * .75)
+        {   //repair if tower reserves > 75% so there is always ammo to shoot
             {tower.repair(closestDamagedStructure[0]);}
         }
 
