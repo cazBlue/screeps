@@ -4,7 +4,7 @@ const roles = {
     upgrade: 'upgrade',
     builder: 'builder',
     mule: 'mule',
-    gavAssist: 'gavassist'
+    gavAssist: 'gavgavgavgav'
 };
 
 module.exports = roles;

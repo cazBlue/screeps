@@ -4,7 +4,7 @@ const RoleUpgrade = require('role.upgrade');
 const RoleBuilder = require('role.builder');
 const RoleMule = require('role.mule');
 const Roles = require('roles');
-//const RoleGav = require('role.gavAssist');
+const RoleGav = require('role.gavAssist');
 
 
 module.exports.loop = function () {
@@ -54,9 +54,9 @@ module.exports.loop = function () {
             case Roles.mule:
                 RoleMule.run(creep);
                 break;
-/*            case "gavassist":
+            case Roles.gavAssist:
                 RoleGav.run(creep);
-                break;*/
+                break;
         }
     }
 };

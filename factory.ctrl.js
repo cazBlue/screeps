@@ -77,9 +77,9 @@ const factory = {
                 role: Roles.mule
             },
             gavAssist: {
-                target: -1,
+                target: 3,
                 count: 0,
-                skills: [CARRY,CARRY,MOVE,MOVE,MOVE],
+                skills: [MOVE,MOVE,MOVE,MOVE,MOVE],
                 role: Roles.gavAssist
             }
         };
