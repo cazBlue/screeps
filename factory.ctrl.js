@@ -59,7 +59,7 @@ const factory = {
                 role: Roles.harvest
             },
             upgradeBot: {
-                target: 3,
+                target: 1,
                 count: 0,
                 skills: [WORK,CARRY,CARRY,MOVE],
                 role: Roles.upgrade
@@ -77,7 +77,7 @@ const factory = {
                 role: Roles.mule
             },
             gavAssist: {
-                target: 3,
+                target: -1,
                 count: 0,
                 skills: [MOVE,MOVE,MOVE,MOVE,MOVE],
                 role: Roles.gavAssist

@@ -123,6 +123,13 @@ const muleStates = {
         //console.log('deliver to');
         //console.log(target);
 
+        if(target.store.getFreeCapacity(RESOURCE_ENERGY) === 0)
+        {
+            creep.memory.state = states.selectDeliverTarget;
+            return;
+        }
+
+
         const transferRres = creep.transfer(target, RESOURCE_ENERGY);
 
         if(transferRres === OK)
