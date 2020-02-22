@@ -19,6 +19,7 @@ const builderStates = {
             creep.memory.state = states.selectResource;
         }else
         {
+            creep.findn
             creep.say('Build/Repair');
             creep.memory.state = states.selectBuildOrRepair;
         }
@@ -103,7 +104,8 @@ const builderStates = {
 
         const repairTargets = creep.room.find(FIND_STRUCTURES, {
             filter: (structure) => {
-                return ( structure.hits < structure.hitsMax)
+                return (structure.structureType !== STRUCTURE_WALL && structure.structureType !== STRUCTURE_RAMPART
+                            && structure.hits < structure.hitsMax)
             }
         });
 
@@ -112,6 +114,7 @@ const builderStates = {
         {
             //clean this up, make sure containers are built first
             buildTargets.sort((a, b) => a.structureType !== STRUCTURE_CONTAINER);
+
 
             creep.memory.state = states.build;
             creep.memory.target = buildTargets[0].id;

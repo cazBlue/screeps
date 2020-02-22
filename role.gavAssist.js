@@ -5,8 +5,8 @@ const roleGavAssist = {
     run: function(creep) {
 
         const targets = {
-            one: [8,17],
-            two: [13,9]
+            one: [21,22],
+            two: [36,15]
         };
 
         //are we in gavs room?

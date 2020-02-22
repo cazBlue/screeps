@@ -5,7 +5,7 @@ const RoleBuilder = require('role.builder');
 const RoleMule = require('role.mule');
 const Roles = require('roles');
 const RoleGav = require('role.gavAssist');
-
+const MathUtil = require('math.util');
 
 module.exports.loop = function () {
     for(const name in Memory.creeps) {
@@ -20,12 +20,26 @@ module.exports.loop = function () {
     //lazy tower addition....
     const tower = Game.getObjectById('5e4dbf28a3d52080467472d5');
     if(tower) {
-/*        const closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-            filter: (structure) => structure.hits < structure.hitsMax
+        const closestDamagedStructure = tower.room.find(FIND_STRUCTURES, {
+            filter: (structure) => {
+                return structure.hits < structure.hitsMax &&
+                                        structure.structureType === STRUCTURE_WALL ||
+                                        structure.structureType === STRUCTURE_RAMPART
+            }
         });
-        if(closestDamagedStructure) {
-            tower.repair(closestDamagedStructure);
-        }*/
+
+        closestDamagedStructure.sort((a,b) => {
+            const aNorm = MathUtil.normalize(a.hits, a.hitsMax, 0);
+            const bNorm = MathUtil.normalize(b.hits, b.hitsMax, 0);
+            //console.log(`A normal: ${aNorm} B Normal: ${bNorm}`);
+
+            return aNorm - bNorm;
+        });
+
+        if(closestDamagedStructure.length) {
+            tower.repair(closestDamagedStructure[0]);
+        }
+
         //todo add room states for WAR/invader detection
         const closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
         if(closestHostile) {

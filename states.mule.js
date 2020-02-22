@@ -1,4 +1,5 @@
 const states = require('states');
+const MathUtil = require('math.util');
 
 const location = {x: 0, y: 1};
 const places = {
@@ -13,13 +14,25 @@ const getExtension = (creep) => {
             struct.structureType === STRUCTURE_TOWER)
     });
 
-    extensions.sort((a, b) => b.store.getFreeCapacity(RESOURCE_ENERGY) - a.store.getFreeCapacity(RESOURCE_ENERGY));
+   // console.log(`*****************************`);
+    extensions.sort((a,b) => {
+        const aNorm = MathUtil.normalize(a.store.getFreeCapacity(RESOURCE_ENERGY), a.store.getCapacity(RESOURCE_ENERGY), 0);
+        const bNorm = MathUtil.normalize(b.store.getFreeCapacity(RESOURCE_ENERGY), b.store.getCapacity(RESOURCE_ENERGY), 0);
 
-    //console.log(extensions);
+       // console.log(`A normal: ${aNorm} B Normal: ${bNorm}`);
+
+        return bNorm - aNorm;
+    });
+    //console.log(`*****************************`);
+    //extensions.forEach(ext => console.log(ext.structureType));
+
+    //extensions.sort((a, b) => b.store.getFreeCapacity(RESOURCE_ENERGY) - a.store.getFreeCapacity(RESOURCE_ENERGY));
+
+    //console.log(JSON.stringify(extensions));
 
     let selection = extensions[0];
 
-    for( const extens in extensions)
+/*    for( const extens in extensions)
     {
         //console.log('*************************************************');
         //console.log(extensions[extens].store.getFreeCapacity(RESOURCE_ENERGY));
@@ -28,7 +41,7 @@ const getExtension = (creep) => {
            && extensions[extens].store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
            selection = extensions[extens]; //lets top up the spawn first
        }
-    }
+    }*/
 
     return selection;
 };
