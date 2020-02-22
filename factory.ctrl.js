@@ -73,7 +73,7 @@ const factory = {
             muleBot: {
                 target: 2,
                 count: 0,
-                skills: [CARRY,CARRY,MOVE,MOVE],
+                skills: [CARRY,CARRY,CARRY,CARRY,MOVE,MOVE],
                 role: Roles.mule
             },
             gavAssist: {

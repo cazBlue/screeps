@@ -99,7 +99,7 @@ const muleStates = {
 
         if(target.store.getUsedCapacity(RESOURCE_ENERGY) === 0 || withdrawRes === ERR_NOT_ENOUGH_RESOURCES)
         {
-            console.log("yes");
+            //console.log("yes");
             creep.moveTo(places.holding[0], places.holding[1], {visualizePathStyle: {stroke: '#83ff6b'} });
             creep.memory.state = states.idle;
         }
@@ -124,6 +124,9 @@ const muleStates = {
         //console.log(target);
 
         const transferRres = creep.transfer(target, RESOURCE_ENERGY);
+
+        if(transferRres === OK)
+            return;
 
         if(transferRres === ERR_NOT_IN_RANGE)
         {

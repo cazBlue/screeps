@@ -36,8 +36,10 @@ module.exports.loop = function () {
             return aNorm - bNorm;
         });
 
-        if(closestDamagedStructure.length) {
-            tower.repair(closestDamagedStructure[0]);
+        if(closestDamagedStructure.length &&
+            tower.store.getUsedCapacity(RESOURCE_ENERGY) > tower.store.getCapacity(RESOURCE_ENERGY) / 2)
+        {   //repair if tower reserves > 50% so there is always ammo to shoot
+            {tower.repair(closestDamagedStructure[0]);}
         }
 
         //todo add room states for WAR/invader detection
