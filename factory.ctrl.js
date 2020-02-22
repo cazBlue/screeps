@@ -65,7 +65,7 @@ const factory = {
                 role: Roles.upgrade
             },
             builderBot: {
-                target: 2,
+                target: 4,
                 count: 0,
                 skills: [WORK,CARRY,CARRY,MOVE,MOVE,MOVE],
                 role: Roles.builder

@@ -14,7 +14,9 @@ const roleGavAssist = {
         if(isGavRoom)
         {
             //pick some random location and yell at Gav
-            creep.say("GAV GAV GAV");
+            creep.say("GAVGAVGAV");
+            //console.log(creep.signController(Game.getObjectById('5e4f5909b59f24e086d75ba8'), 'GAVGAVGAVGAV'))
+            //creep.moveTo(Game.getObjectById('5bbcac829099fc012e63595a'))
             if(creep.pos.isNearTo(targets.one[0], targets.one[1]) && creep.memory.target === 'one')
             {
                 creep.memory.target = 'two';
