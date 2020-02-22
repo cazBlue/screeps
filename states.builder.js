@@ -1,4 +1,5 @@
 const states = require('states');
+const MathUtil = require('math.util');
 
 const location = {x: 0, y: 1};
 const places = {
@@ -117,8 +118,15 @@ const builderStates = {
         }
         else if(repairTargets.length)
         {
-            repairTargets.sort((a,b) => a.hits - b.hits);
             repairTargets.sort((a,b) => {
+                const aNorm = MathUtil.normalize(a.hits, a.hitsMax, 0);
+                const bNorm = MathUtil.normalize(b.hits, b.hitsMax, 0);
+                //console.log(`A normal: ${aNorm} B Normal: ${bNorm}`);
+
+                return aNorm - bNorm;
+
+            });
+/*            repairTargets.sort((a,b) => {
                 const isCont = a.structureType === STRUCTURE_CONTAINER;
                 const bIsCont = b.structureType === STRUCTURE_CONTAINER;
                 if(isCont)
@@ -127,7 +135,18 @@ const builderStates = {
                     return 1;
 
                 return 0;
-            });
+            });*/
+
+/*            console.log("********************************");
+            console.log(JSON.stringify(repairTargets[0]));
+            console.log(JSON.stringify(repairTargets[1]));
+            console.log(JSON.stringify(repairTargets[2]));
+            console.log("********************************");*/
+
+/*            console.log(repairTargets[0].structureType);
+            console.log(repairTargets[0].hits);
+            console.log(repairTargets[0].id);*/
+
             creep.memory.state = states.repair;
             creep.memory.target = repairTargets[0].id;
         }
@@ -164,13 +183,18 @@ const builderStates = {
     repair: (creep) => {
         const target = Game.getObjectById(creep.memory.target);
 
-        if(creep.repair(target) == ERR_NOT_IN_RANGE) {
+        const repRes = creep.repair(target) == ERR_NOT_IN_RANGE;
+
+        //console.log(target);
+        //console.log(repRes);
+
+        if(repRes) {
             creep.moveTo(target, {visualizePathStyle: {stroke: '#83ff6b'}});
         }
 
-        if(creep.store[RESOURCE_ENERGY] == 0 || target.hits >= target.hitsMax)
+        if(creep.store.getUsedCapacity(RESOURCE_ENERGY) === 0 || target.hits >= target.hitsMax)
         {
-            creep.memory.state = states.idle; //let idle handle it
+            creep.memory.state = states.idle; //make sure  repair targets are cycled
         }
     }
 };

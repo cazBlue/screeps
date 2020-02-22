@@ -7,8 +7,6 @@ const Roles = require('roles');
 //const RoleGav = require('role.gavAssist');
 
 
-
-
 module.exports.loop = function () {
     for(const name in Memory.creeps) {
         if(!Game.creeps[name]) {
@@ -35,8 +33,6 @@ module.exports.loop = function () {
         }
     }
 
-
-
     for(const name in Game.creeps) {
         const creep = Game.creeps[name];
         //console.log(Game.creeps[name]);
@@ -61,8 +57,6 @@ module.exports.loop = function () {
 /*            case "gavassist":
                 RoleGav.run(creep);
                 break;*/
-
         }
-
     }
 };
