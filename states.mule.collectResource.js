@@ -4,9 +4,7 @@ const places = {
     holding: [6,19]
 };
 
-const collectResource = (creep) => {
-    const target = Game.getObjectById(creep.memory.target);
-
+const withdrawFromContainer = (creep, target) => {
     const withdrawRes = creep.withdraw(target, RESOURCE_ENERGY);
 
     if(withdrawRes === ERR_NOT_IN_RANGE)
@@ -27,6 +25,38 @@ const collectResource = (creep) => {
         creep.moveTo(places.holding[0], places.holding[1], {visualizePathStyle: {stroke: '#83ff6b'} });
         creep.memory.state = states.idle;
     }
+};
+
+const collectResource = (creep) => {
+    const target = Game.getObjectById(creep.memory.target);
+
+    if(!target)
+    {
+        creep.memory.state = states.idle;
+        return;
+    }
+
+    if(target.structureType === STRUCTURE_CONTAINER)
+        withdrawFromContainer(creep, target);
+    else //dropped resource
+    {
+        const pickup = creep.pickup(target);
+
+        if(pickup === ERR_NOT_IN_RANGE)
+        {
+            const moveRes = creep.moveTo(target, {visualizePathStyle: {stroke: '#83ff6b'} });
+        }
+
+        if(creep.store[RESOURCE_ENERGY] === creep.store.getCapacity(RESOURCE_ENERGY))
+        {
+            creep.memory.state = states.selectDeliverTarget;
+        }
+
+        if(pickup === ERR_INVALID_TARGET)
+            creep.memory.state = states.idle;
+    }
+
+
 
 };
 

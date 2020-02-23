@@ -17,8 +17,18 @@ const idle = (creep) => {
 
     const droppedSources = creep.room.find(FIND_DROPPED_RESOURCES, {
         //todo add filter by amount
+        filter: (resource) => resource.resourceType === RESOURCE_ENERGY
     });
 
+    console.log(JSON.stringify(droppedSources));
+    //snap up all dropped resources, will cover if the container decays/blows up + invader corpses
+    if(droppedSources.length)
+    {
+
+        creep.memory.state = states.collectResource;
+        creep.memory.target = droppedSources[0].id;
+        return;
+    }
 
     const ext = MuleUtil.getExtension(creep);
     //console.log(ext.store.getFreeCapacity(RESOURCE_ENERGY));

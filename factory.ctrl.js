@@ -22,7 +22,7 @@ const spawnACreep = (role, skills) => {
 
     Game.spawns['Rome'].spawnCreep(skills, newName, {
         memory: {role: role, state: states.idle},
-        directions: [TOP]
+        directions: [RIGHT]
     });
 };
 
