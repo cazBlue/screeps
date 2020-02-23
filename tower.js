@@ -5,16 +5,23 @@ const Tower = (tower) => {
         const closestDamagedStructure = tower.room.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return structure.hits < structure.hitsMax &&
-                    structure.structureType === STRUCTURE_WALL ||
-                    structure.structureType === STRUCTURE_RAMPART ||
-                    structure.structureType === STRUCTURE_CONTAINER
+                    //structure.structureType === STRUCTURE_WALL ||
+                    //structure.structureType === STRUCTURE_RAMPART ||
+                    structure.structureType === STRUCTURE_CONTAINER ||
+                    structure.structureType === STRUCTURE_ROAD
             }
         });
 
+        //sort by normalized decay/damage but give priority to containers
         closestDamagedStructure.sort((a,b) => {
             const aNorm = MathUtil.normalize(a.hits, a.hitsMax, 0);
             const bNorm = MathUtil.normalize(b.hits, b.hitsMax, 0);
             //console.log(`A normal: ${aNorm} B Normal: ${bNorm}`);
+            if(a.structureType === STRUCTURE_CONTAINER)
+                return  -1;
+
+            if(b.structureType === STRUCTURE_CONTAINER)
+                return  1;
 
             return aNorm - bNorm;
         });

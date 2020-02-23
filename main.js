@@ -12,16 +12,26 @@ module.exports.loop = function () {
         }
     }
 
-    for(const name in Game.creeps) {
+    for(const room in Rooms)
+    {
+        if(!Rooms[room].active)
+            continue;
+
+        RoomCtrl.checkPlan(Rooms[room]);
+        RoomCtrl.tower();
+        RoomCtrl.spawn(Rooms[room]);
+        //Rooms[room]
+    }
+
+    for(const creepsKey in Game.creeps) {
 
         //console.log(Game.creeps[name].room.name);
-        const creep = Game.creeps[name];
+        const creep = Game.creeps[creepsKey];
 
         switch (creep.room.name) {
 
             case Rooms.rome.name:
-                RoomCtrl.spawn({});
-                RoomCtrl.run(creep, {});
+                RoomCtrl.run(creep, Rooms.rome.plan);
                 break
 
         }

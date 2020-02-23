@@ -9,22 +9,26 @@ const RoleBuilder = require('role.builder');
 const RoleMule = require('role.mule');
 const RoleGav = require('role.gavAssist');
 
-const plan = {
-    roomName: 'W7S27',
-    //role: Roles.gavAssist
-    //source:
+const checkPlan = (plan) => {
+    //console.log(plan.name);
+
+
+
 };
 
 const Room = {
+    checkPlan: (roomPlan) => checkPlan(roomPlan),
     spawn: (roomPlan) => {
         factory.run(); //create new creeps when needed
     },
-    run: (creep, roomPlan) => {
-
+    tower: () => {
         //lazy tower addition....
         const tower = Game.getObjectById('5e4dbf28a3d52080467472d5');
         Tower(tower);
+    },
+    run: (creep, roomPlan) => {
 
+        //console.log('yes');
 
         switch (creep.memory.role) {
             case Roles.harvest:
