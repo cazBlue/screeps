@@ -1,5 +1,7 @@
 const rooms = {
-    rome: 'W7S27',
+    rome: {
+        name: 'W7S27',
+        plan: {}},
     gav: 'W7S28',
     antioch: 'W6S27'
 };

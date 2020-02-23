@@ -19,7 +19,7 @@ const builderStates = {
             creep.memory.state = states.selectResource;
         }else
         {
-            creep.findn
+            //creep.findn
             creep.say('Build/Repair');
             creep.memory.state = states.selectBuildOrRepair;
         }

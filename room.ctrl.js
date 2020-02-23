@@ -16,10 +16,11 @@ const plan = {
 };
 
 const Room = {
-    spawn: () => {
+    spawn: (roomPlan) => {
         factory.run(); //create new creeps when needed
     },
-    run: (creep) => {
+    run: (creep, roomPlan) => {
+
         //lazy tower addition....
         const tower = Game.getObjectById('5e4dbf28a3d52080467472d5');
         Tower(tower);

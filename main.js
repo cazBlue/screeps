@@ -1,7 +1,7 @@
 
 
 const Rooms = require('rooms');
-const RoomRome = require('room.rome');
+const RoomCtrl = require('room.ctrl');
 //const RoomRome = require('room.gav');
 
 module.exports.loop = function () {
@@ -12,15 +12,6 @@ module.exports.loop = function () {
         }
     }
 
-    for(const room in Rooms)
-    {
-        switch (Rooms[room]) {
-            case Rooms.rome:
-                RoomRome.spawn();
-                break
-        }
-    }
-
     for(const name in Game.creeps) {
 
         //console.log(Game.creeps[name].room.name);
@@ -28,8 +19,9 @@ module.exports.loop = function () {
 
         switch (creep.room.name) {
 
-            case Rooms.rome:
-                RoomRome.run(creep);
+            case Rooms.rome.name:
+                RoomCtrl.spawn({});
+                RoomCtrl.run(creep, {});
                 break
 
         }
