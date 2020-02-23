@@ -15,6 +15,8 @@ module.exports.loop = function () {
         }
     }
 
+    //_.()
+
     factory.run(); //create new creeps when needed
 
     //lazy tower addition....

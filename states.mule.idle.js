@@ -20,7 +20,7 @@ const idle = (creep) => {
         filter: (resource) => resource.resourceType === RESOURCE_ENERGY
     });
 
-    console.log(JSON.stringify(droppedSources));
+    //console.log(JSON.stringify(droppedSources));
     //snap up all dropped resources, will cover if the container decays/blows up + invader corpses
     if(droppedSources.length)
     {
