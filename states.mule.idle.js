@@ -22,9 +22,8 @@ const idle = (creep) => {
 
     //console.log(JSON.stringify(droppedSources));
     //snap up all dropped resources, will cover if the container decays/blows up + invader corpses
-    if(droppedSources.length)
+    if(droppedSources.length && droppedSources[0].amount > containers[0].store.getUsedCapacity(RESOURCE_ENERGY))
     {
-
         creep.memory.state = states.collectResource;
         creep.memory.target = droppedSources[0].id;
         return;

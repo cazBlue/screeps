@@ -12,16 +12,8 @@ module.exports.loop = function () {
         }
     }
 
-    for(const room in Rooms)
-    {
-        if(!Rooms[room].active)
-            continue;
 
-        RoomCtrl.checkPlan(Rooms[room]);
-        RoomCtrl.tower();
-        RoomCtrl.spawn(Rooms[room]);
-        //Rooms[room]
-    }
+    //Game.creeps['harvest15902932'].memory.sourceID = 0;
 
     for(const creepsKey in Game.creeps) {
 
@@ -35,5 +27,16 @@ module.exports.loop = function () {
                 break
 
         }
+    }
+
+    for(const room in Rooms)
+    {
+        if(!Rooms[room].active)
+            continue;
+
+        const creepToSpawn = RoomCtrl.checkPlan(Rooms[room]);
+        RoomCtrl.tower();
+        RoomCtrl.spawn(creepToSpawn);
+        //Rooms[room]
     }
 };

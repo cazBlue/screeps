@@ -8,16 +8,42 @@ const getExtension = (creep) => {
             struct.structureType === STRUCTURE_TOWER)
     });
 
-    // console.log(`*****************************`);
+  //   console.log(`*****************************`);
     extensions.sort((a,b) => {
-        const aNorm = MathUtil.normalize(a.store.getFreeCapacity(RESOURCE_ENERGY), a.store.getCapacity(RESOURCE_ENERGY), 0);
-        const bNorm = MathUtil.normalize(b.store.getFreeCapacity(RESOURCE_ENERGY), b.store.getCapacity(RESOURCE_ENERGY), 0);
+        //const aNorm = MathUtil.normalize(a.store.getFreeCapacity(RESOURCE_ENERGY), a.store.getCapacity(RESOURCE_ENERGY), 0);
+        //const bNorm = MathUtil.normalize(b.store.getFreeCapacity(RESOURCE_ENERGY), b.store.getCapacity(RESOURCE_ENERGY), 0);
 
         // console.log(`A normal: ${aNorm} B Normal: ${bNorm}`);
 
-        return bNorm - aNorm;
+        const aRange = creep.pos.getRangeTo(a);
+        const bRange = creep.pos.getRangeTo(b);
+/*        console.log(`*****************************`);
+        console.log('a range: ' + aRange);
+        console.log('b range: ' + bRange);
+        console.log(aRange < bRange && a.store.getFreeCapacity(RESOURCE_ENERGY) > 0);
+        console.log('capacity: ' + a.store.getFreeCapacity(RESOURCE_ENERGY));
+        console.log(`*****************************`);*/
+
+/*        if (aRange === bRange)
+            return 0;*/
+
+        if(aRange < bRange && a.store.getFreeCapacity(RESOURCE_ENERGY) > 0)
+            return -1;
+
+        if(aRange > bRange && b.store.getFreeCapacity(RESOURCE_ENERGY) > 0)
+            return 1;
+
+        return 0;
+
+        //const
+
+        //return bNorm - aNorm;
     });
-    //console.log(`*****************************`);
+
+
+/*    console.log(`*****************************`);
+    console.log(JSON.stringify(extensions[0].store.getUsedCapacity(RESOURCE_ENERGY)));
+    console.log(`*****************************`);*/
 
     return extensions[0];
 };

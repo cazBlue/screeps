@@ -15,13 +15,13 @@ const Roles = require('roles');
 
 const states = require('states');
 
-const spawnACreep = (role, skills) => {
+const spawnACreep = (role, skills, target = '', sourceID = 1) => {
     //console.log("Not enough " + role);
     const newName = role + Game.time;
     //console.log('Spawning new harvester: ' + newName);
 
     Game.spawns['Rome'].spawnCreep(skills, newName, {
-        memory: {role: role, state: states.idle},
+        memory: {role: role, state: states.idle, target: target, sourceID: sourceID},
         directions: [RIGHT]
     });
 };
@@ -50,7 +50,7 @@ const updateCounts = (ScreepsList) => {
 };
 
 const factory = {
-    run: () => {
+    run: (creepToSpawn) => {
         let Screeps = {
             harvestBot: {
                 target: 2,
@@ -65,15 +65,15 @@ const factory = {
                 role: Roles.upgrade
             },
             builderBot: {
-                target: 1,
+                target: 2,
                 count: 0,
-                skills: [WORK, WORK, CARRY,CARRY,CARRY,MOVE,MOVE,MOVE], //100, 100,  50, 50, 50, 50, 50, 50
+                skills: [WORK, WORK, CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE], //100, 100,  50, 50, 50, 50, 50, 50
                 role: Roles.builder
             },
             muleBot: {
-                target: 2,
+                target: 6,
                 count: 0,
-                skills: [CARRY,CARRY,CARRY,CARRY,MOVE,MOVE],
+                skills: [CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE],
                 role: Roles.mule
             },
             gavAssist: {
@@ -94,14 +94,20 @@ const factory = {
         //give replacing harvesters top billing
         let spawnSelected = false;
 
-        if(Screeps.harvestBot.count <= Screeps.harvestBot.target
+        if(creepToSpawn.roleToSpawn)
+        {
+            spawnACreep(creepToSpawn.roleToSpawn, Screeps.harvestBot.skills, creepToSpawn.target, creepToSpawn.sourceID);
+            spawnSelected = true;
+        }
+
+/*        if(Screeps.harvestBot.count <= Screeps.harvestBot.target
             && !spawnSelected
             && Screeps.muleBot.count > 0
             )
         {
             spawnACreep(Roles.harvest, Screeps.harvestBot.skills);
             spawnSelected = true;
-        }
+        }*/
 
 
         if(Screeps.muleBot.count <= Screeps.muleBot.target && !spawnSelected)

@@ -11,7 +11,8 @@ const rooms = {
         footing: Footings.peace,
         name: 'W7S27',
         plan: {
-            source: [
+            source:
+            [
                 {
                     locations: [
                         [11, 19],
