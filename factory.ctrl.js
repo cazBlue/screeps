@@ -15,15 +15,20 @@ const Roles = require('roles');
 
 const states = require('states');
 
-const spawnACreep = (role, skills, target = '', sourceID = 1) => {
+const spawnACreep = (role, skills, target = '', sourceID = 0) => {
     //console.log("Not enough " + role);
     const newName = role + Game.time;
     //console.log('Spawning new harvester: ' + newName);
 
-    Game.spawns['Rome'].spawnCreep(skills, newName, {
+    const res = Game.spawns['Rome'].spawnCreep(skills, newName, {
         memory: {role: role, state: states.idle, target: target, sourceID: sourceID},
         directions: [RIGHT]
     });
+
+    if(res === ERR_NOT_ENOUGH_ENERGY)
+        return false;
+
+    return true;
 };
 
 const updateCounts = (ScreepsList) => {
@@ -96,43 +101,42 @@ const factory = {
 
         if(creepToSpawn.roleToSpawn)
         {
-            spawnACreep(creepToSpawn.roleToSpawn, Screeps.harvestBot.skills, creepToSpawn.target, creepToSpawn.sourceID);
-            spawnSelected = true;
+            spawnSelected = spawnACreep(creepToSpawn.roleToSpawn, Screeps.harvestBot.skills, creepToSpawn.target, creepToSpawn.sourceID);
+
+            if(_.sum(Game.creeps, creep => creep.memory.role === Roles.mule) > 0)
+            {
+                spawnSelected = true;
+            }
+
         }
-
-/*        if(Screeps.harvestBot.count <= Screeps.harvestBot.target
-            && !spawnSelected
-            && Screeps.muleBot.count > 0
-            )
-        {
-            spawnACreep(Roles.harvest, Screeps.harvestBot.skills);
-            spawnSelected = true;
-        }*/
-
 
         if(Screeps.muleBot.count <= Screeps.muleBot.target && !spawnSelected)
         {
+           // console.log("tried to spawn a mule");
             spawnACreep(Roles.mule, Screeps.muleBot.skills);
             spawnSelected = true;
         }
+        else {
+            if(Screeps.upgradeBot.count <= Screeps.upgradeBot.target && !spawnSelected)
+            {
+                spawnACreep(Roles.upgrade, Screeps.upgradeBot.skills);
+                spawnSelected = true;
+            }
 
-        if(Screeps.upgradeBot.count <= Screeps.upgradeBot.target && !spawnSelected)
-        {
-            spawnACreep(Roles.upgrade, Screeps.upgradeBot.skills);
-            spawnSelected = true;
+            if(Screeps.builderBot.count <= Screeps.builderBot.target && !spawnSelected)
+            {
+                spawnACreep(Roles.builder, Screeps.builderBot.skills);
+                spawnSelected = true;
+            }
+
+            if(Screeps.gavAssist.count <= Screeps.gavAssist.target && !spawnSelected)
+            {
+                spawnACreep(Roles.gavAssist, Screeps.gavAssist.skills);
+                spawnSelected = true;
+            }
         }
 
-        if(Screeps.builderBot.count <= Screeps.builderBot.target && !spawnSelected)
-        {
-            spawnACreep(Roles.builder, Screeps.builderBot.skills);
-            spawnSelected = true;
-        }
 
-        if(Screeps.gavAssist.count <= Screeps.gavAssist.target && !spawnSelected)
-        {
-            spawnACreep(Roles.gavAssist, Screeps.gavAssist.skills);
-            spawnSelected = true;
-        }
 
     }
 };

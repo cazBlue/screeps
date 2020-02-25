@@ -40,15 +40,21 @@ const checkPlan = (roomPlan) => {
     containerCheck(roomPlan, roomObj);
 
     const harvesters = roomObj.find(  FIND_CREEPS , {
-        filter: creep => creep.memory.role === Roles.harvest
+        filter: creep => {
+            return (creep.owner.username === 'domitoVita' &&
+            creep.memory.role === Roles.harvest)
+        }
     });
 
-   // console.log(`${harvesters.length} Harvesters`);
+    //console.log(`${harvesters.length} Harvesters`);
 
     let creepToSpawn = {roleToSpawn: null};
 
     for(let i = 0; i < roomPlan.plan.source.length; i++) {
         for (let j = 0; j < roomPlan.plan.source[i].locations.length; j++) {
+            if(creepToSpawn.roleToSpawn)
+                continue;
+
             const loc = roomPlan.plan.source[i].locations[j];
 
             //check if a harvester is heading to the target location

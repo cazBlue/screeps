@@ -2,6 +2,16 @@ const MathUtil = require('math.util');
 
 const Tower = (tower) => {
     if(tower) {
+        const closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+
+        if(closestHostile) {
+            //console.log("attacking");
+            tower.attack(closestHostile);
+            return;
+        }
+
+
+
         const closestDamagedStructure = tower.room.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return structure.hits < structure.hitsMax &&
@@ -26,6 +36,8 @@ const Tower = (tower) => {
             return aNorm - bNorm;
         });
 
+
+
         if(closestDamagedStructure.length &&
             tower.store.getUsedCapacity(RESOURCE_ENERGY) > tower.store.getCapacity(RESOURCE_ENERGY) * .75)
         {   //repair if tower reserves > 75% so there is always ammo to shoot
@@ -33,10 +45,8 @@ const Tower = (tower) => {
         }
 
         //todo add room states for WAR/invader detection
-        const closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-        if(closestHostile) {
-            tower.attack(closestHostile);
-        }
+
+
     }
 };
 
