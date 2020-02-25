@@ -5,8 +5,12 @@ const MuleUtil = require('mule.util');
 const selectDeliverTarget = (creep) => {
     const extension = MuleUtil.getExtension(creep);
 
+    if(!extension)
+        return;
+
     creep.memory.state = states.deliverResource;
     creep.memory.target = extension.id;
+
 
     if(extension.store.getFreeCapacity(RESOURCE_ENERGY) === 0)
     {

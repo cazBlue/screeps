@@ -3,9 +3,13 @@ const MathUtil = require('math.util');
 const getExtension = (creep) => {
     const extensions = creep.room.find(FIND_STRUCTURES, {
         filter: (struct) => (
+            (
             struct.structureType === STRUCTURE_EXTENSION ||
             struct.structureType === STRUCTURE_SPAWN ||
-            struct.structureType === STRUCTURE_TOWER)
+            struct.structureType === STRUCTURE_TOWER
+            )
+            && struct.store.getFreeCapacity(RESOURCE_ENERGY) > 0
+        )
     });
 
   //   console.log(`*****************************`);
@@ -27,10 +31,13 @@ const getExtension = (creep) => {
 /*        if (aRange === bRange)
             return 0;*/
 
-        if(aRange < bRange && a.store.getFreeCapacity(RESOURCE_ENERGY) > 0)
+        //top of towers last
+        if(a.structureType === STRUCTURE_TOWER){return 1;}
+
+        if(aRange < bRange )
             return -1;
 
-        if(aRange > bRange && b.store.getFreeCapacity(RESOURCE_ENERGY) > 0)
+        if(aRange > bRange )
             return 1;
 
         return 0;

@@ -30,6 +30,10 @@ const idle = (creep) => {
     }
 
     const ext = MuleUtil.getExtension(creep);
+
+    if(!ext)
+        return;
+
     //console.log(ext.store.getFreeCapacity(RESOURCE_ENERGY));
     if(ext.store.getFreeCapacity(RESOURCE_ENERGY) === 0)
     {
