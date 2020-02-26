@@ -33,22 +33,15 @@ const containerCheck = (roomPlan, roomObj) => {
     }
 };
 
-
-const checkPlan = (roomPlan) => {
-    const roomObj = Game.rooms['W7S27'];//Game.rooms[roomPlan.name];
-
-    containerCheck(roomPlan, roomObj);
+const harvesterCheck= (roomPlan, roomObj) => {
+    let creepToSpawn = {roleToSpawn: null};
 
     const harvesters = roomObj.find(  FIND_CREEPS , {
         filter: creep => {
             return (creep.owner.username === 'domitoVita' &&
-            creep.memory.role === Roles.harvest)
+                creep.memory.role === Roles.harvest)
         }
     });
-
-    //console.log(`${harvesters.length} Harvesters`);
-
-    let creepToSpawn = {roleToSpawn: null};
 
     for(let i = 0; i < roomPlan.plan.source.length; i++) {
         for (let j = 0; j < roomPlan.plan.source[i].locations.length; j++) {
@@ -73,6 +66,22 @@ const checkPlan = (roomPlan) => {
             }
         }
     }
+
+    return creepToSpawn;
+};
+
+
+const checkPlan = (roomPlan) => {
+    const roomObj = Game.rooms['W7S27'];//Game.rooms[roomPlan.name];
+
+    containerCheck(roomPlan, roomObj);
+
+    //console.log(`${harvesters.length} Harvesters`);
+
+    let creepToSpawn = harvesterCheck(roomPlan, roomObj);
+
+
+
 
     //console.log(JSON.stringify(creepToSpawn));
 

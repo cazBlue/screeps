@@ -10,6 +10,7 @@ const Tower = (tower) => {
             return;
         }
 
+        //tower.room
 
 
         const closestDamagedStructure = tower.room.find(FIND_STRUCTURES, {

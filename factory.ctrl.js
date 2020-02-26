@@ -60,25 +60,25 @@ const factory = {
             harvestBot: {
                 target: 2,
                 count: 0,
-                skills: [WORK, WORK, WORK, MOVE], //100, 100, 100, 50 = 350
+                skills: [WORK, WORK, WORK, MOVE, MOVE, MOVE], //100, 100, 100, 50 = 350
                 role: Roles.harvest
             },
             upgradeBot: {
                 target: 4,
                 count: 0,
-                skills: [WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE],
+                skills: [WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE],
                 role: Roles.upgrade
             },
             builderBot: {
                 target: 2,
                 count: 0,
-                skills: [WORK, WORK, CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE], //100, 100,  50, 50, 50, 50, 50, 50
+                skills: [WORK, WORK, CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], //100, 100,  50, 50, 50, 50, 50, 50
                 role: Roles.builder
             },
             muleBot: {
                 target: 6,
                 count: 0,
-                skills: [CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE],
+                skills: [CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE],
                 role: Roles.mule
             },
             gavAssist: {

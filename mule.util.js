@@ -33,6 +33,7 @@ const getExtension = (creep) => {
 
         //top of towers last
         if(a.structureType === STRUCTURE_TOWER){return 1;}
+        if(b.structureType === STRUCTURE_TOWER){return -1;}
 
         if(aRange < bRange )
             return -1;
