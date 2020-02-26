@@ -104,10 +104,12 @@ const builderStates = {
 
         const repairTargets = creep.room.find(FIND_STRUCTURES, {
             filter: (structure) => {
-                return (structure.structureType !== STRUCTURE_WALL && structure.structureType !== STRUCTURE_RAMPART
+                return ((structure.structureType === STRUCTURE_WALL || structure.structureType === STRUCTURE_RAMPART)
                             && structure.hits < structure.hitsMax)
             }
         });
+
+        //console.log(JSON.stringify(repairTargets));
 
         //give build priority for now
         if(buildTargets.length)

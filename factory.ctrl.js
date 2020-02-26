@@ -64,9 +64,9 @@ const factory = {
                 role: Roles.harvest
             },
             upgradeBot: {
-                target: 1,
+                target: 4,
                 count: 0,
-                skills: [WORK,CARRY,CARRY,MOVE],
+                skills: [WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE],
                 role: Roles.upgrade
             },
             builderBot: {

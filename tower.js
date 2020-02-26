@@ -15,10 +15,12 @@ const Tower = (tower) => {
         const closestDamagedStructure = tower.room.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return structure.hits < structure.hitsMax &&
+                    (
                     //structure.structureType === STRUCTURE_WALL ||
-                    //structure.structureType === STRUCTURE_RAMPART ||
+                    structure.structureType === STRUCTURE_RAMPART ||
                     structure.structureType === STRUCTURE_CONTAINER ||
                     structure.structureType === STRUCTURE_ROAD
+                    )
             }
         });
 
@@ -33,9 +35,13 @@ const Tower = (tower) => {
             if(b.structureType === STRUCTURE_CONTAINER)
                 return  1;
 
+/*            if(a.structureType === STRUCTURE_WALL || a.structureType === STRUCTURE_RAMPART)
+                return 1;*/
+
             return aNorm - bNorm;
         });
 
+        console.log(JSON.stringify(closestDamagedStructure[0]));
 
 
         if(closestDamagedStructure.length &&
