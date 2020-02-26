@@ -19,6 +19,9 @@ const roleMule = {
             case states.selectDeliverTarget:
                 stateOpt.selectDeliverTarget(creep);
                 break;
+            case states.selectCollectTarget:
+                stateOpt.selectCollectTarget(creep);
+                break;
         }
     }
 };

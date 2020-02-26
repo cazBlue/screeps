@@ -20,7 +20,8 @@ const Tower = (tower) => {
                     //structure.structureType === STRUCTURE_WALL ||
                     structure.structureType === STRUCTURE_RAMPART ||
                     structure.structureType === STRUCTURE_CONTAINER ||
-                    structure.structureType === STRUCTURE_ROAD
+                    structure.structureType === STRUCTURE_ROAD ||
+                    structure.structureType === STRUCTURE_STORAGE
                     )
             }
         });
@@ -42,7 +43,7 @@ const Tower = (tower) => {
             return aNorm - bNorm;
         });
 
-        console.log(JSON.stringify(closestDamagedStructure[0]));
+        //console.log(JSON.stringify(closestDamagedStructure[0]));
 
 
         if(closestDamagedStructure.length &&

@@ -31,7 +31,40 @@ const rooms = {
             tower: [
                 [6, 21]
             ]
-        }
+        },
+        muleRun: [
+            {
+                max: 3,
+                collectLocations: [
+                    [
+                        [11, 19],
+                        [11, 20],
+                        [11, 21],
+                        [13, 27]
+                    ]
+                ],
+                deliverTargets:
+                    [
+                    STRUCTURE_SPAWN,
+                    STRUCTURE_EXTENSION,
+                    STRUCTURE_TOWER
+                    ]
+            },
+            {
+                max: 3,
+                collectLocations: [
+                    [
+                        [18, 40],
+                        [19, 40],
+                        [20, 40]
+                    ]
+                ],
+                deliverTargets:
+                    [
+                        STRUCTURE_STORAGE
+                    ]
+            }
+        ]
     },
     gav: {
         active: false,

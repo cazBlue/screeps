@@ -37,12 +37,16 @@ const idle = (creep) => {
     //console.log(ext.store.getFreeCapacity(RESOURCE_ENERGY));
     if(ext.store.getFreeCapacity(RESOURCE_ENERGY) === 0)
     {
+        //if everything is topped off
+
         creep.moveTo(places.holding[location.x], places.holding[location.y]);
         return;
     } //wait until there is a need
 
     if(creep.store.getFreeCapacity(RESOURCE_ENERGY) > 0)
     {
+        //check if another creep is trying to collect from this resource
+
         creep.memory.state = states.collectResource;
         creep.memory.target = containers[0].id;
     }

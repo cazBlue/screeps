@@ -10,7 +10,8 @@ const states = {
     selectBuildOrRepair: 9,
     deliverResource: 10,
     selectDeliverTarget: 11,
-    spawnBuilding: 12
+    spawnBuilding: 12,
+    selectCollectTarget: 13
 };
 
 module.exports = states;

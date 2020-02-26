@@ -43,6 +43,8 @@ const harvesterCheck= (roomPlan, roomObj) => {
         }
     });
 
+    //console.log(`${harvesters.length} Harvesters`);
+
     for(let i = 0; i < roomPlan.plan.source.length; i++) {
         for (let j = 0; j < roomPlan.plan.source[i].locations.length; j++) {
             if(creepToSpawn.roleToSpawn)
@@ -72,15 +74,20 @@ const harvesterCheck= (roomPlan, roomObj) => {
 
 
 const checkPlan = (roomPlan) => {
-    const roomObj = Game.rooms['W7S27'];//Game.rooms[roomPlan.name];
+    const roomObj = Game.rooms[roomPlan.name];//Game.rooms[roomPlan.name];
+
+/*    console.log(roomPlan.name);
+    console.log(roomObj);*/
 
     containerCheck(roomPlan, roomObj);
-
-    //console.log(`${harvesters.length} Harvesters`);
 
     let creepToSpawn = harvesterCheck(roomPlan, roomObj);
 
 
+    //check mules
+    //todo add mule pool ID
+
+    //todo add embedd mule pool collect/deliver targets
 
 
     //console.log(JSON.stringify(creepToSpawn));
