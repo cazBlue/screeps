@@ -102,58 +102,32 @@ const builderStates = {
         //todo improve choice making logic
         const buildTargets = creep.room.find(FIND_CONSTRUCTION_SITES, {});
 
-        const repairTargets = creep.room.find(FIND_STRUCTURES, {
+        const repairTargets = creep.pos.findClosestByPath(FIND_STRUCTURES, {
             filter: (structure) => {
-                return ((structure.structureType === STRUCTURE_WALL || structure.structureType === STRUCTURE_RAMPART)
-                            && structure.hits < structure.hitsMax)
+                if(structure.structureType !== STRUCTURE_ROAD)
+                    return false;
+
+                const isDamaged = (structure.hits < structure.hitsMax) > structure.hitsMax *.75;
+                //console.log(isDamaged);
+                return isDamaged;
             }
         });
 
+        //console.log(JSON.stringify(buildTargets.length));
         //console.log(JSON.stringify(repairTargets));
 
-        //give build priority for now
-        if(buildTargets.length)
+        if(repairTargets)
+        {
+            creep.memory.state = states.repair;
+            creep.memory.target = repairTargets.id;
+        }
+        else if(buildTargets.length > 0)
         {
             //clean this up, make sure containers are built first
             buildTargets.sort((a, b) => a.structureType !== STRUCTURE_CONTAINER);
 
-
             creep.memory.state = states.build;
             creep.memory.target = buildTargets[0].id;
-        }
-        else if(repairTargets.length)
-        {
-            repairTargets.sort((a,b) => {
-                const aNorm = MathUtil.normalize(a.hits, a.hitsMax, 0);
-                const bNorm = MathUtil.normalize(b.hits, b.hitsMax, 0);
-                //console.log(`A normal: ${aNorm} B Normal: ${bNorm}`);
-
-                return aNorm - bNorm;
-
-            });
-/*            repairTargets.sort((a,b) => {
-                const isCont = a.structureType === STRUCTURE_CONTAINER;
-                const bIsCont = b.structureType === STRUCTURE_CONTAINER;
-                if(isCont)
-                    return -1;
-                if(bIsCont)
-                    return 1;
-
-                return 0;
-            });*/
-
-/*            console.log("********************************");
-            console.log(JSON.stringify(repairTargets[0]));
-            console.log(JSON.stringify(repairTargets[1]));
-            console.log(JSON.stringify(repairTargets[2]));
-            console.log("********************************");*/
-
-/*            console.log(repairTargets[0].structureType);
-            console.log(repairTargets[0].hits);
-            console.log(repairTargets[0].id);*/
-
-            creep.memory.state = states.repair;
-            creep.memory.target = repairTargets[0].id;
         }
     },
     build: (creep) => {
@@ -187,6 +161,9 @@ const builderStates = {
     },
     repair: (creep) => {
         const target = Game.getObjectById(creep.memory.target);
+
+        if(!target)
+            {creep.memory.state = states.idle;}
 
         const repRes = creep.repair(target) == ERR_NOT_IN_RANGE;
 

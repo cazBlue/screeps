@@ -18,7 +18,7 @@ const Tower = (tower) => {
                 return structure.hits < structure.hitsMax &&
                     (
                     //structure.structureType === STRUCTURE_WALL ||
-                    structure.structureType === STRUCTURE_RAMPART ||
+                    /*structure.structureType === STRUCTURE_RAMPART ||*/
                     structure.structureType === STRUCTURE_CONTAINER ||
                     structure.structureType === STRUCTURE_ROAD ||
                     structure.structureType === STRUCTURE_STORAGE
@@ -31,7 +31,7 @@ const Tower = (tower) => {
             const aNorm = MathUtil.normalize(a.hits, a.hitsMax, 0);
             const bNorm = MathUtil.normalize(b.hits, b.hitsMax, 0);
             //console.log(`A normal: ${aNorm} B Normal: ${bNorm}`);
-            if(a.structureType === STRUCTURE_CONTAINER)
+            if(a.structureType === STRUCTURE_CONTAINER || a.structureType === STRUCTURE_ROAD)
                 return  -1;
 
             if(b.structureType === STRUCTURE_CONTAINER)

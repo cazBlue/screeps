@@ -104,6 +104,10 @@ const Room = {
         //lazy tower addition....
         const tower = Game.getObjectById('5e4dbf28a3d52080467472d5');
         Tower(tower);
+
+        const towerTwo = Game.getObjectById('5e5783e474988d3f08a32f7d');
+        Tower(towerTwo);
+
     },
     run: (creep, roomPlan) => {
 
