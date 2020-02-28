@@ -32,8 +32,12 @@ const getExtension = (creep) => {
             return 0;*/
 
         //top of towers last
-        if(a.structureType === STRUCTURE_TOWER){return 1;}
-        if(b.structureType === STRUCTURE_TOWER){return -1;}
+        if(a.structureType === STRUCTURE_TOWER &&
+            a.store.getUsedCapacity(RESOURCE_ENERGY) > a.store.getCapacity(RESOURCE_ENERGY) * .6){return 1;}
+        if(b.structureType === STRUCTURE_TOWER &&
+            b.store.getUsedCapacity(RESOURCE_ENERGY) > b.store.getCapacity(RESOURCE_ENERGY) * .6){return -1;}
+
+        //if(a.structureType === STRUCTURE_TOWER && a.store.getCapacity(RESOURCE_ENERGY) * .5){return 1;}
 
         if(aRange < bRange )
             return -1;
