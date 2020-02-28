@@ -107,14 +107,14 @@ const builderStates = {
                 if(structure.structureType !== STRUCTURE_ROAD)
                     return false;
 
-                const isDamaged = (structure.hits < structure.hitsMax) && structure.hits > structure.hitsMax *.75;
+                const isDamaged = (structure.hits < structure.hitsMax) && structure.hits > (structure.hitsMax *.75);
                 //console.log(isDamaged);
                 return isDamaged;
             }
         });
 
         //console.log(JSON.stringify(buildTargets.length));
-        console.log(JSON.stringify(repairTargets));
+        //console.log(JSON.stringify(repairTargets));
 
         if(repairTargets)
         {
