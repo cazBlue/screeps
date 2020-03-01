@@ -24,11 +24,6 @@ const roleUpgrader = {
 
             if(sources.length)
             {
-                //select the best source
-                sources.sort((a, b) => b.store[RESOURCE_ENERGY] - a.store[RESOURCE_ENERGY]);
-
-                //todo select the closest store
-
                 const target = sources[0];
 
                 if(creep.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE)
