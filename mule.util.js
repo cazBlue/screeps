@@ -6,7 +6,8 @@ const getExtension = (creep) => {
             (
             struct.structureType === STRUCTURE_EXTENSION ||
             struct.structureType === STRUCTURE_SPAWN ||
-            struct.structureType === STRUCTURE_TOWER
+            struct.structureType === STRUCTURE_TOWER ||
+            struct.structureType === STRUCTURE_STORAGE
             )
             && struct.store.getFreeCapacity(RESOURCE_ENERGY) > 0
         )
@@ -39,6 +40,11 @@ const getExtension = (creep) => {
 
         //if(a.structureType === STRUCTURE_TOWER && a.store.getCapacity(RESOURCE_ENERGY) * .5){return 1;}
 
+        //storage comes last
+        if(a.structureType === STRUCTURE_STORAGE && b.structureType !== STRUCTURE_STORAGE){return 1;}
+        if(b.structureType === STRUCTURE_STORAGE && a.structureType !== STRUCTURE_STORAGE){return -1;}
+
+        //otherwise sort by range
         if(aRange < bRange )
             return -1;
 

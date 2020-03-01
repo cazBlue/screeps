@@ -33,11 +33,7 @@ const builderStates = {
         //select resource
         //const dropped = creep.room.find(FIND_DROPPED_RESOURCES); //todo find dropped resources
         const sources = creep.room.find(FIND_STRUCTURES, {
-            filter: (struct) => struct.structureType === STRUCTURE_CONTAINER
-        });
-
-        const droppedSources = creep.room.find(FIND_DROPPED_RESOURCES, {
-            //todo add filter by amount
+            filter: (struct) => struct.structureType === STRUCTURE_STORAGE
         });
 
         if(sources.length)

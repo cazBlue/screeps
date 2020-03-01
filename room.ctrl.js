@@ -9,6 +9,7 @@ const RoleUpgrade = require('role.upgrade');
 const RoleBuilder = require('role.builder');
 const RoleMule = require('role.mule');
 const RoleGav = require('role.gavAssist');
+const RoleNightFill = require('role.nightfill');
 
 const containerCheck = (roomPlan, roomObj) => {
     //container check
@@ -128,6 +129,9 @@ const Room = {
                 break;
             case Roles.gavAssist:
                 RoleGav.run(creep);
+                break;
+            case Roles.nightFill:
+                RoleNightFill.run(creep);
                 break;
         }
     }

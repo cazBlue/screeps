@@ -2,6 +2,18 @@ const MathUtil = require('math.util');
 
 const Tower = (tower) => {
     if(tower) {
+        const sources = tower.room.find(FIND_STRUCTURES, {
+            filter: (struct) => struct.structureType === STRUCTURE_STORAGE && struct.hits < struct.hitsMax
+        });
+
+        //keep the storage up
+        if(sources.length)
+        {
+            //console.log(sources);
+            tower.repair(sources[0]);
+            return;
+        }
+
         const closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
 
         if(closestHostile) {

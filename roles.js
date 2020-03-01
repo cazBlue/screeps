@@ -4,6 +4,7 @@ const roles = {
     upgrade: 'upgrade',
     builder: 'builder',
     mule: 'mule',
+    nightFill: 'nightfill',
     gavAssist: 'gavgavgavgav'
 };
 

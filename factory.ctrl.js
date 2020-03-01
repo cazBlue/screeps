@@ -70,16 +70,22 @@ const factory = {
                 role: Roles.upgrade
             },
             builderBot: {
-                target: 4,
+                target: 1,
                 count: 0,
                 skills: [WORK, WORK, CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE], //100, 100,  50, 50, 50, 50, 50, 50
                 role: Roles.builder
             },
             muleBot: {
-                target: 6,
+                target: 4,
                 count: 0,
                 skills: [CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE],
                 role: Roles.mule
+            },
+            nightFillBot: {
+                target: 2,
+                count: 0,
+                skills: [CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE],
+                role: Roles.nightFill
             },
             gavAssist: {
                 target: -1,
@@ -110,13 +116,20 @@ const factory = {
 
         }
 
-        if(Screeps.muleBot.count <= Screeps.muleBot.target && !spawnSelected)
+        if(Screeps.nightFillBot.count <= Screeps.nightFillBot.target && !spawnSelected)
         {
-           // console.log("tried to spawn a mule");
-            spawnACreep(Roles.mule, Screeps.muleBot.skills);
+            // console.log("tried to spawn a mule");
+            spawnACreep(Roles.nightFill, Screeps.nightFillBot.skills);
             spawnSelected = true;
         }
         else {
+            if(Screeps.muleBot.count <= Screeps.muleBot.target && !spawnSelected)
+            {
+                // console.log("tried to spawn a mule");
+                spawnACreep(Roles.mule, Screeps.muleBot.skills);
+                spawnSelected = true;
+            }
+
             if(Screeps.upgradeBot.count <= Screeps.upgradeBot.target && !spawnSelected)
             {
                 spawnACreep(Roles.upgrade, Screeps.upgradeBot.skills);
