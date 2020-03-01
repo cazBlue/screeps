@@ -49,6 +49,9 @@ const updateCounts = (ScreepsList) => {
             case Roles.gavAssist:
                 ScreepsList.gavAssist.count++;
                 break;
+            case Roles.nightFill:
+                ScreepsList.nightFillBot.count++;
+                break;
         }
     }
     return ScreepsList;
