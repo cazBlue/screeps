@@ -5,6 +5,7 @@ const roleMule = {
     run: (creep) => {
 
         //creep.memory.state = states.idle;
+        //console.log("creep memory " + creep.memory.state);
 
         switch (creep.memory.state) {
             case states.idle:
