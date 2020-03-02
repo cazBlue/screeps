@@ -67,7 +67,7 @@ const factory = {
                 role: Roles.harvest
             },
             upgradeBot: {
-                target: 1,
+                target: 2,
                 count: 0,
                 skills: [WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE],
                 role: Roles.upgrade
@@ -81,11 +81,11 @@ const factory = {
             muleBot: {
                 target: 4,
                 count: 0,
-                skills: [CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE],
+                skills: [CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE],
                 role: Roles.mule
             },
             nightFillBot: {
-                target: 2,
+                target: 1,
                 count: 0,
                 skills: [CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE],
                 role: Roles.nightFill
