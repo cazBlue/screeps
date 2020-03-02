@@ -19,8 +19,10 @@ const roleUpgrader = {
         }
         else {
             const sources = creep.room.find(FIND_STRUCTURES, {
-                filter: (struct) => struct.structureType === STRUCTURE_CONTAINER
+                filter: (struct) => struct.structureType === STRUCTURE_STORAGE
             });
+
+            //console.log(sources);
 
             if(sources.length)
             {
