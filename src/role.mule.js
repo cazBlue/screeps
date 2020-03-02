@@ -1,5 +1,5 @@
-const states = require('src/states');
-const stateOpt = require('src/states.mule');
+const states = require('states');
+const stateOpt = require('states.mule');
 
 const roleMule = {
     run: (creep) => {

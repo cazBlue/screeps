@@ -1,15 +1,15 @@
-const Roles = require('src/roles');
-const States = require('src/states');
-const Tower = require('src/tower');
+const Roles = require('roles');
+const States = require('states');
+const Tower = require('tower');
 //const MathUtil = require('math.util');
-const factory = require('src/factory.ctrl');
+const factory = require('factory.ctrl');
 
-const RoleHarvest = require('src/role.harvest');
-const RoleUpgrade = require('src/role.upgrade');
-const RoleBuilder = require('src/role.builder');
-const RoleMule = require('src/role.mule');
-const RoleGav = require('src/role.gavAssist');
-const RoleNightFill = require('src/role.nightfill');
+const RoleHarvest = require('role.harvest');
+const RoleUpgrade = require('role.upgrade');
+const RoleBuilder = require('role.builder');
+const RoleMule = require('role.mule');
+const RoleGav = require('role.gavAssist');
+const RoleNightFill = require('role.nightfill');
 
 const containerCheck = (roomPlan, roomObj) => {
     //container check

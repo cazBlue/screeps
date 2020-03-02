@@ -1,4 +1,4 @@
-const RoomPlan = require('src/room.gav');
+const RoomPlan = require('room.gav');
 
 const roleGavAssist = {
     /** @param {Creep} creep **/

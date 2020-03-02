@@ -1,8 +1,8 @@
-const StateIdle = require('src/states.mule.idle');
-const StateCollectResource = require('src/states.mule.collectResource');
-const StateDeliverResource = require('src/states.mule.deliverResource');
-const selectDeliverTarget = require('src/states.mule.selectTarget');
-const selectCollectTarget = require('src/states.mule.selectCollectTarget');
+const StateIdle = require('states.mule.idle');
+const StateCollectResource = require('states.mule.collectResource');
+const StateDeliverResource = require('states.mule.deliverResource');
+const selectDeliverTarget = require('states.mule.selectTarget');
+const selectCollectTarget = require('states.mule.selectCollectTarget');
 
 const muleStates = {
     idle: (creep) => StateIdle(creep),

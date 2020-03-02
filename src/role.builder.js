@@ -1,5 +1,5 @@
-const states = require('src/states');
-const stateOpt = require('src/states.builder');
+const states = require('states');
+const stateOpt = require('states.builder');
 
 
 const places = {

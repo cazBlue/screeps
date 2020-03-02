@@ -1,4 +1,4 @@
-const Roles = require('src/roles');
+const Roles = require('roles');
 
 
 /* //https://docs.screeps.com/api/#Constants
@@ -13,7 +13,7 @@ const Roles = require('src/roles');
     "claim": 600
  */
 
-const states = require('src/states');
+const states = require('states');
 
 const spawnACreep = (role, skills, target = '', sourceID = 0) => {
     //console.log("Not enough " + role);

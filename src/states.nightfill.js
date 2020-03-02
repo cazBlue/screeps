@@ -1,7 +1,7 @@
-const states = require('src/states');
-const StateCollectResource = require('src/states.nightfill.collectResource');
-const StateDeliverResource = require('src/states.nightfill.deliverResource');
-const selectDeliverTarget = require('src/states.nightfill.selectTarget');
+const states = require('states');
+const StateCollectResource = require('states.nightfill.collectResource');
+const StateDeliverResource = require('states.nightfill.deliverResource');
+const selectDeliverTarget = require('states.nightfill.selectTarget');
 
 const nightfillStates = {
     idle: (creep) => {

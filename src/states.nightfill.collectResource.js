@@ -1,4 +1,4 @@
-const states = require('src/states');
+const states = require('states');
 const location = {x: 0, y: 1};
 const places = {
     holding: [6,19]

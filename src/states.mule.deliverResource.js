@@ -1,4 +1,4 @@
-const states = require('src/states');
+const states = require('states');
 
 
 const muleDeliver = (creep) => {

@@ -1,5 +1,5 @@
-const states = require('src/states');
-const MathUtil = require('src/math.util');
+const states = require('states');
+const MathUtil = require('math.util');
 
 const location = {x: 0, y: 1};
 const places = {

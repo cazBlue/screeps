@@ -1,7 +1,7 @@
 
 
-const Rooms = require('src/rooms');
-const RoomCtrl = require('src/room.ctrl');
+const Rooms = require('rooms');
+const RoomCtrl = require('room.ctrl');
 //const RoomRome = require('room.gav');
 
 module.exports.loop = function () {

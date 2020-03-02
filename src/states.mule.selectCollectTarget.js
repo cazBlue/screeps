@@ -1,5 +1,5 @@
-const states = require('src/states');
-const MuleUtil = require('src/mule.util');
+const states = require('states');
+const MuleUtil = require('mule.util');
 
 
 const selectCollectTarget = (creep) => {

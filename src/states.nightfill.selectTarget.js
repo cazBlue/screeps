@@ -1,6 +1,6 @@
-const states = require('src/states');
-const MuleUtil = require('src/mule.util');
-const Roles = require('src/roles');
+const states = require('states');
+const MuleUtil = require('mule.util');
+const Roles = require('roles');
 
 const selectDeliverTarget = (creep) => {
     const extension = MuleUtil.getExtension(creep);

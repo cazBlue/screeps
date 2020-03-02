@@ -1,4 +1,4 @@
-const Roles = require('src/roles');
+const Roles = require('roles');
 
 //Just wonder over and yell at Gav
 const plan = {

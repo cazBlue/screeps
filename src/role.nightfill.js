@@ -1,5 +1,5 @@
-const states = require('src/states');
-const stateOpt = require('src/states.nightfill');
+const states = require('states');
+const stateOpt = require('states.nightfill');
 
 const roleNightFill = {
     run: (creep) => {

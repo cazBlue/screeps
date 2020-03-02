@@ -1,4 +1,4 @@
-const MathUtil = require('src/math.util');
+const MathUtil = require('math.util');
 
 const Tower = (tower) => {
     if(tower) {

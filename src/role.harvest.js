@@ -1,5 +1,5 @@
-const states = require('src/states');
-const stateOpt = require('src/states.harvester');
+const states = require('states');
+const stateOpt = require('states.harvester');
 
 const roleHarvest = {
     run: (creep) => {

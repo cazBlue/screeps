@@ -1,5 +1,5 @@
-const MuleUtil = require('src/mule.util');
-const states = require('src/states');
+const MuleUtil = require('mule.util');
+const states = require('states');
 
 const location = {x: 0, y: 1};
 const places = {
