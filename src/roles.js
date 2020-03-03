@@ -5,7 +5,8 @@ const roles = {
     builder: 'builder',
     mule: 'mule',
     nightFill: 'nightfill',
-    gavAssist: 'gavgavgavgav'
+    gavAssist: 'gavgavgavgav',
+    longHaul: 'longHaul'
 };
 
 module.exports = roles;

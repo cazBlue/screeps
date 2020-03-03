@@ -26,7 +26,11 @@ const spawnACreep = (role, skills, target = '', sourceID = 0) => {
     });
 
     if(res === ERR_NOT_ENOUGH_ENERGY)
+    {
+        //todo reduce parts until it can spawn
+        //console.log("not enough energy to spawn");
         return false;
+    }
 
     return true;
 };
@@ -52,6 +56,9 @@ const updateCounts = (ScreepsList) => {
             case Roles.nightFill:
                 ScreepsList.nightFillBot.count++;
                 break;
+            case Roles.longHaul:
+                ScreepsList.longHaulBot.count++;
+                break;
         }
     }
     return ScreepsList;
@@ -66,8 +73,14 @@ const factory = {
                 skills: [WORK, WORK, WORK, MOVE, MOVE, MOVE], //100, 100, 100, 50 = 350
                 role: Roles.harvest
             },
+            longHaulBot: {
+                target: 0,
+                count: 0,
+                skills: [CARRY,CARRY,CARRY,CARRY, WORK, WORK, WORK, MOVE, MOVE, MOVE], //700
+                role: Roles.longHaul
+            },
             upgradeBot: {
-                target: 2,
+                target: 1,
                 count: 0,
                 skills: [WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE],
                 role: Roles.upgrade
@@ -108,50 +121,52 @@ const factory = {
         //give replacing harvesters top billing
         let spawnSelected = false;
 
-        if(creepToSpawn.roleToSpawn)
-        {
-            spawnSelected = spawnACreep(creepToSpawn.roleToSpawn, Screeps.harvestBot.skills, creepToSpawn.target, creepToSpawn.sourceID);
-
-            if(_.sum(Game.creeps, creep => creep.memory.role === Roles.mule) > 0)
-            {
-                spawnSelected = true;
-            }
-
-        }
+        //console.log(JSON.stringify(creepToSpawn));
 
         if(Screeps.nightFillBot.count <= Screeps.nightFillBot.target && !spawnSelected)
         {
-            // console.log("tried to spawn a mule");
+             //console.log("tried to spawn NightFill");
             spawnACreep(Roles.nightFill, Screeps.nightFillBot.skills);
             spawnSelected = true;
         }
-        else {
-            if(Screeps.muleBot.count <= Screeps.muleBot.target && !spawnSelected)
-            {
-                // console.log("tried to spawn a mule");
-                spawnACreep(Roles.mule, Screeps.muleBot.skills);
-                spawnSelected = true;
-            }
 
-            if(Screeps.upgradeBot.count <= Screeps.upgradeBot.target && !spawnSelected)
-            {
-                spawnACreep(Roles.upgrade, Screeps.upgradeBot.skills);
-                spawnSelected = true;
-            }
+        if(creepToSpawn.roleToSpawn && !spawnSelected)
+        {
+            spawnSelected = spawnACreep(creepToSpawn.roleToSpawn, Screeps.harvestBot.skills, creepToSpawn.target, creepToSpawn.sourceID);
 
-            if(Screeps.builderBot.count <= Screeps.builderBot.target && !spawnSelected)
-            {
-                spawnACreep(Roles.builder, Screeps.builderBot.skills);
-                spawnSelected = true;
-            }
-
-            if(Screeps.gavAssist.count <= Screeps.gavAssist.target && !spawnSelected)
-            {
-                spawnACreep(Roles.gavAssist, Screeps.gavAssist.skills);
-                spawnSelected = true;
-            }
+            spawnSelected = true;
         }
 
+        if(Screeps.muleBot.count <= Screeps.muleBot.target && !spawnSelected)
+        {
+            // console.log("tried to spawn a mule");
+            spawnACreep(Roles.mule, Screeps.muleBot.skills);
+            spawnSelected = true;
+        }
+
+        if(Screeps.upgradeBot.count <= Screeps.upgradeBot.target && !spawnSelected)
+        {
+            spawnACreep(Roles.upgrade, Screeps.upgradeBot.skills);
+            spawnSelected = true;
+        }
+
+        if(Screeps.builderBot.count <= Screeps.builderBot.target && !spawnSelected)
+        {
+            spawnACreep(Roles.builder, Screeps.builderBot.skills);
+            spawnSelected = true;
+        }
+
+        if(Screeps.gavAssist.count <= Screeps.gavAssist.target && !spawnSelected)
+        {
+            spawnACreep(Roles.gavAssist, Screeps.gavAssist.skills);
+            spawnSelected = true;
+        }
+
+        if(Screeps.longHaulBot.count <= Screeps.longHaulBot.target && !spawnSelected)
+        {
+            spawnACreep(Roles.longHaul, Screeps.longHaulBot.skills);
+            spawnSelected = true;
+        }
 
 
     }

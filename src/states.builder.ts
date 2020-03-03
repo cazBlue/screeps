@@ -11,7 +11,8 @@ const places = {
 export interface DomCreep extends Creep {
     memory: {
         state: number,
-        target: string
+        target: string,
+        role: string,
     }
 }
 

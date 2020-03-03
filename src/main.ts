@@ -34,8 +34,9 @@ export const loop = () => {
             continue;
 
         const creepToSpawn = RoomCtrl.checkPlan(Rooms[room]);
-        RoomCtrl.tower();
         RoomCtrl.spawn(creepToSpawn);
     }
+
+    RoomCtrl.tower();
 
 };
